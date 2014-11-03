@@ -1,0 +1,209 @@
+{
+    "MenuComplex": 
+    [ 
+
+        {
+            "title": "Candidates",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuCandidates",
+            "description": "Candidates Menu",
+             "subitems":
+             [ 
+
+                {
+                    "title": "Candidate Search",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CandidateSearch",
+                    "description": "Search for Candidates"  
+                },
+                {
+                    "title": "Candidate Details",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CandidateDetails",
+                    "description": "Candidates' Details"  
+                },
+                {
+                    "title": "Candidate Leaders",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CandidateLeaders",
+                    "description": "Candidates Leaders"  
+                },
+                {
+                    "title": "State Candidates",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CandidatesState",
+                    "description": "State Candidates"  
+                },
+                {
+                    "title": "New Candidates",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CandidatesNew",
+                    "description": "New Candidates"  
+                }
+            
+            ]
+        },
+
+        { 
+            "title": "Committees",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuCommittess",
+            "description": "Committees Menu",
+            "subitems":[
+                {
+                    "title": "Committee Search",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeSearch",
+                    "description": "Search Committees"
+                },
+                {
+                    "title": "Committee Details",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeDetails",
+                    "description": "Committees' Details"  
+                },
+                {
+                    "title": "New Committees",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeNew",
+                    "description": "New Committees"  
+                },
+                {
+                    "title": "Committee Contributions",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeContributions",
+                    "description": "Committees' Contributions"  
+                },
+                {
+                    "title": "Committee Contributions to a Candidate",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeContributionsToCandidate",
+                    "description": "Committee Contributions to a Candidate"  
+                },
+                {
+                    "title": "Committee Filings",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeFilings",
+                    "description": "Committee Filings"  
+                },
+                {
+                    "title": "Leadership Committees",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "CommitteeLeadership",
+                    "description": "Leadership Committees"  
+                }
+            ]
+        },
+
+        { 
+            "title": "Presidential Campaigns",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuPresidential",
+            "description": "Presidential Campaigns Menu",
+            "subitems":[ 
+                {
+                    "title": "Candidate Totals",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "PresidentialCandidateTotals",
+                    "description": "Total of Candidates"
+                },
+                {
+                    "title": "Candidates' Details",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "PresidentialCandidateDetails",
+                    "description": "Candidates's Details"  
+                },
+                {
+                    "title": "State/ZIP Totals",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "PresidentialStateZipTotals",
+                    "description": "State/ZIP Totals"  
+                }
+            ]
+        },
+
+
+        { 
+            "title": "Eletronic Filings",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuEletronicFilings",
+            "description": "Eletronic Filings Menu",
+            "subitems":
+            [ 
+                {
+                    "title": "Filings by Date",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "EletronicFilingsByDate",
+                    "description": "Filings by Date"
+                },
+                {
+                    "title": "Form Types",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "EletronicFilingsFormTypes",
+                    "description": "Electronic Filings Form Types"
+                },
+                {
+                    "title": "Filings by Type",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "EletronicFilingsByType",
+                    "description": "Electronic Filing by Type"
+                },
+                {
+                    "title": "Filing Summary",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "EletronicFilingsSummary",
+                    "description": "Filing Summary"
+                },
+                {
+                    "title": "Recent Amendments",
+                    "icon": "sap-icon://sys-help",
+                    "targetPage": "EletronicFilingsRecentAmendments",
+                    "description": "Recent Amendments"
+                }
+            ]
+        
+        },
+
+        {  
+            "title": "Electioneering Communications",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuElectioneeringCommunications",
+            "description": "Electioneering Communications Menu",
+            "todo": "add Electioneering Communications"
+        },
+
+        { 
+            "title": "Individual Contributions",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuIndividualContributions",
+            "description": "Individual Contributions Menu",
+             "todo": "add Individual Contributions"
+        },
+
+        { 
+            "title": "Independent Expenditures",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuIndependentExpenditures",
+            "description": "Independent Expenditures Menu",
+            "todo":"add Independent Expenditures"
+        },
+
+        {  
+            "title": "Late Contributions to Candidates",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuLateContributionsToCandidates",
+            "description": "Late Contributions to Candidates Menu",
+            "todo": "add Late Contributions to Candidates"
+        },
+
+        {  
+            "title": "Lobbyist Bundlers",
+            "icon": "sap-icon://sys-help",
+            "targetPage": "MenuLobbyistBundlers",
+            "description": "Lobbyist Bundlers Menu",
+            "todo": "add Lobbyist Bundlers"
+        }
+
+    ]
+
+}
