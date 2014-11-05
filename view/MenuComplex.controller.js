@@ -8,10 +8,12 @@ sap.ui.controller("ui5bp.view.MenuComplex", {
     },
 
     doNavOnSelect: function(event) {
+        
         if (sap.ui.Device.system.phone) {
             event.getParameter("listItem").setSelected(false);
         }
         this.bus.publish("nav", "to", {
+
             id: event.getParameter('listItem').getCustomData()[0].getValue()
         });
     }
