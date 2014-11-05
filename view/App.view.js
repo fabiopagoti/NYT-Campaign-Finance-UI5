@@ -45,17 +45,20 @@ sap.ui.jsview("ui5bp.view.App", {
             }
         });
 
-        this.app.addMasterPage(sap.ui.jsview("Menu", "ui5bp.view.Menu"));
+        
+//        this.app.addMasterPage(sap.ui.jsview("Menu", "ui5bp.view.Menu"));
+        this.app.addMasterPage(sap.ui.jsview("MenuComplex", "ui5bp.view.MenuComplex"));
 
-        this.app.addDetailPage(sap.ui.xmlview("Info", "ui5bp.view.Info"));
-        this.app.addDetailPage(sap.ui.jsview("CoffeeList", "ui5bp.view.CoffeeList"));
-        this.app.addDetailPage(sap.ui.jsview("NewFeatures-v122", "ui5bp.view.NewFeatures-v122"));
+        this.app.addDetailPage(sap.ui.jsview("CandidateSearch", "ui5bp.view.CandidateSearch"));
+        // this.app.addDetailPage(sap.ui.xmlview("Info", "ui5bp.view.Info"));
+        // this.app.addDetailPage(sap.ui.jsview("CoffeeList", "ui5bp.view.CoffeeList"));
+        // this.app.addDetailPage(sap.ui.jsview("NewFeatures-v122", "ui5bp.view.NewFeatures-v122"));
         
         // navigate to the first page in both master and detail areas.
         // the toMaster must be called after calling the toDetail, because both of them point to the same reference in phone and 
         // the real first page that will be shown in phone is the page in master area. 
-        this.app.toDetail("CoffeeList");
-        this.app.toMaster("Menu");
+        this.app.toDetail("CandidateSearch");
+        this.app.toMaster("MenuComplex");
 
         return this.app;
     }

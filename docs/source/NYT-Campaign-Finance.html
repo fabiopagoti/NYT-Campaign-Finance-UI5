@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+<span id='NYT-CampaignURL'>/**
+</span> * @class NYT.CampaignURL
+ * A generic campaign URL
+ * @extends Object
+ */
+NYT.CampaignURL = function(campaign_cycle, api_key, response_format, callback, version){
+	
+	this.campaign_cycle = campaign_cycle || &quot;2000-present&quot;;
+	this.api_key = api_key || &quot;2aa53ca167a919c9be93fe68919698ee:11:68901588&quot;;
+	this.response_format = response_format || &quot;json&quot;;
+	this.callback = callback || function(){};
+	this.version = version || &quot;v3&quot;;
+
+};
+
+<span id='NYT-CampaignURL-method-getBaseURL'>/**
+</span> * Returns a base URL of a generic CampaignURL
+ * @return {String} base URL
+ */
+NYT.CampaignURL.prototype.getBaseURL = function(){
+	return &quot;//api.nytimes.com/svc/elections/us/v3/finances&quot;;
+};
+
+<span id='NYT-CampaignURL-method-getCampaignCycle'>/**
+</span> * Returns the campaignCycle of of a CampaignURL
+ * @return {String} campaignCycle
+ */
+NYT.CampaignURL.prototype.getCampaignCycle = function(){
+	return this.campaign_cycle;
+};
+
+<span id='NYT-CampaignURL-method-setCampaignCycle'>/**
+</span> * Returns a base URL of a generic CampaignURL
+ * @param {String/Number} a year of YYYY format representing the campaign cycle
+ */
+NYT.CampaignURL.prototype.setCampaignCycle = function(campaign_cycle){
+	this.campaign_cycle = campaign_cycle;
+};
+
+NYT.CampaignURL.prototype.getApiKey = function(){
+	return this.api_key;
+};
+
+NYT.CampaignURL.prototype.setApiKey = function(api_key){
+	this.api_key = api_key;
+};	
+
+NYT.CampaignURL.prototype.getResponseFormat = function(){
+	return this.response_format;
+};
+
+NYT.CampaignURL.prototype.setResponseFormat = function(response_format){
+	this.response_format = response_format;
+};
+
+NYT.CampaignURL.prototype.getCallback = function(){
+	return this.callback;
+};
+
+NYT.CampaignURL.prototype.setCallback = function(callback){
+	this.callback = callback;
+};
+
+NYT.CampaignURL.prototype.getVersion = function(){
+	return this.version;
+};
+
+NYT.CampaignURL.prototype.setVersion = function(version){
+	this.version = version;
+};
+
+/*
+ * CANDIDATE SEARCH
+ */
+
+NYT.CampaignURL.CandidateSearch = function(new_campaign_cycle, new_last_name){
+	this.campaign_cycle = new_campaign_cycle;
+	this.last_name = new_last_name;
+};
+
+NYT.CampaignURL.CandidateSearch.prototype = new NYT.CampaignURL;
+
+NYT.CampaignURL.CandidateSearch.prototype.getBaseURL = function(){
+	return &quot;//api.nytimes.com/svc/elections/us/v3/finances/{campaign_cycle}/candidates/search.{response_format}&quot;;
+};
+
+
+
+
+
+
+
+
+
+NYT.campaign = {};
+
+NYT.campaign.base_url = &quot;http://api.nytimes.com/svc/elections/us/v3/finances&quot;;
+
+
+/* COMMON PARAMETERS */
+NYT.campaign.version = &quot;v3&quot;;
+NYT.campaign.campaign_cycle = function(new_campaign_cycle){
+	if (this.campaign_cycle == undefined ){
+		return &quot;2008-present&quot;;
+	} else {
+		return this.campaign_cycle;
+	}
+	
+}
+
+/* API KEY */
+NYT.campaign.api_key = &quot;2aa53ca167a919c9be93fe68919698ee:11:68901588&quot;;
+
+/* RESPONSE FORMATS */
+NYT.campaign.response_format = {};
+NYT.campaign.response_format.JSON = &quot;json&quot;;
+NYT.campaign.response_format.XML = &quot;xml&quot;;
+NYT.campaign.response_format.JSON = &quot;jsonp&quot;;
+NYT.campaign.response_format.default = NYT.campaign.response_format.XML;
+
+/* CALLBACK */
+NYT.campaign.callback = function(callback_function){
+	callback_function();
+};
+
+
+/* UTIL */
+
+NYT.campaign.createQueryParam = function(property, param){
+		if (property != &quot;&quot; &amp;&amp; property !== undefined) {
+			return &quot;&amp;&quot; + param + &quot;=&quot; + property;
+		} else {
+			return &quot;&quot;;
+		}
+	};
+	
+NYT.campaign.createQueryURL = function(query, filter, max){
+
+	var url = NYT.campaign.base_url + 
+		NYT.campaign.createQueryParam(query, &quot;query&quot;) + 
+		NYT.campaign.createQueryParam(filter, &quot;filter&quot;) + 
+		NYT.campaign.createQueryParam(max, &quot;max&quot;) +
+		NYT.campaign.createQueryParam(NYT.campaign.api_key, &quot;api-key&quot;);
+
+	return url;
+
+};
+
+/* Candidate Search */
+NYT.campaign.candidate = {};
+NYT.campaign.candidate.search = {};
+NYT.campaign.candidate.search.setLastName = function(new_last_name){
+	this.lname = new_last_name
+};
+
+NYT.campaign.candidate.search.getLastName = function(){
+	return this.lname;
+};
+
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+
+</pre>
+</body>
+</html>

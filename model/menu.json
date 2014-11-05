@@ -14,5 +14,38 @@
         "icon": "sap-icon://sys-help",
         "targetPage": "Info",
         "description": "More Information"
-    }]
+    },
+    {
+        "title": "Candidate Search",
+        "icon": "sap-icon://sys-help",
+        "targetPage": "CandidateSearch",
+        "description": "Search for Candidates"  
+    },
+    {
+        "title": "Candidate Details",
+        "icon": "sap-icon://sys-help",
+        "targetPage": "CandidateDetails",
+        "description": "Candidates' Details"  
+    },
+    {
+        "title": "Candidate Leaders",
+        "icon": "sap-icon://sys-help",
+        "targetPage": "CandidateLeaders",
+        "description": "Candidates Leaders"  
+    },
+    {
+        "title": "State Candidates",
+        "icon": "sap-icon://sys-help",
+        "targetPage": "CandidatesState",
+        "description": "State Candidates"  
+    },
+    {
+        "title": "New Candidates",
+        "icon": "sap-icon://sys-help",
+        "targetPage": "CandidatesNew",
+        "description": "New Candidates"  
+    }
+
+    ]
+
 }
