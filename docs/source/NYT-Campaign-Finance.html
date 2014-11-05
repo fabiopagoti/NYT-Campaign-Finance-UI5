@@ -91,9 +91,9 @@ NYT.CampaignURL.prototype.setVersion = function(version){
  * CANDIDATE SEARCH
  */
 
-NYT.CampaignURL.CandidateSearch = function(new_campaign_cycle, new_last_name){
-	this.campaign_cycle = new_campaign_cycle;
-	this.last_name = new_last_name;
+NYT.CampaignURL.CandidateSearch = function(campaign_cycle, query){
+	this.campaign_cycle = campaign_cycle | &quot;2000-present&quot;;
+	this.query = query || &quot;&quot;;
 };
 
 NYT.CampaignURL.CandidateSearch.prototype = new NYT.CampaignURL;
@@ -101,6 +101,8 @@ NYT.CampaignURL.CandidateSearch.prototype = new NYT.CampaignURL;
 NYT.CampaignURL.CandidateSearch.prototype.getBaseURL = function(){
 	return &quot;//api.nytimes.com/svc/elections/us/v3/finances/{campaign_cycle}/candidates/search.{response_format}&quot;;
 };
+
+
 
 
 

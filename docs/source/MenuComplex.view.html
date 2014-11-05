@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">sap.ui.jsview(&quot;ui5bp.view.MenuComplex&quot;, {
+
+    getControllerName: function() {
+        return &quot;ui5bp.view.MenuComplex&quot;;
+    },
+
+    createContent: function(oController) {
+
+        var oListTemplate = new sap.m.StandardListItem({
+            title: &quot;{title}&quot;,
+            icon: &quot;{icon}&quot;,
+            description: &quot;{description}&quot;,
+            type: sap.m.ListType.Navigation,
+            customData: new sap.ui.core.CustomData({
+                key: &quot;targetPage&quot;,
+                value: &quot;{targetPage}&quot;
+            })
+        });
+
+        var oList = new sap.m.List({
+            selectionChange: [oController.doNavOnSelect, oController],
+            mode: sap.m.ListMode.SingleSelectMaster
+        });
+        oList.bindAggregation(&quot;items&quot;, &quot;/MenuComplex&quot;, oListTemplate);
+
+
+        return new sap.m.Page({
+            customHeader: new sap.m.Bar({
+                contentLeft: [new sap.m.Image(&quot;ui5Logo&quot;, {
+                    src: &quot;img/57_iPhone_Desktop_Launch.png&quot;,
+                    width: &quot;35px&quot;,
+                    height: &quot;35px&quot;
+                })],
+                contentMiddle: [new sap.m.Text({
+                    text: &quot;{i18n&gt;WELCOME_TITLE}&quot;
+                })]
+            }),
+            content: [oList],
+            // footer: 
+        });
+    }
+
+});</pre>
+</body>
+</html>

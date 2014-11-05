@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">QUnit.module(&quot;CampaignURL.CandidateSearch&quot;);
+
+/*
+ * CANDIDATE SEARCH
+ */
+QUnit.test( &quot;Creation of a CampaignURL.CandidateSearch object&quot;, function(assert){	
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	assert.ok(actual instanceof NYT.CampaignURL);
+	assert.ok(actual instanceof NYT.CampaignURL.CandidateSearch);
+});
+
+QUnit.test( &quot;Base URL&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	var expected = &quot;//api.nytimes.com/svc/elections/us/v3/finances/{campaign_cycle}/candidates/search.{response_format}&quot;;
+	assert.ok(actual.getBaseURL() == expected);
+});
+
+QUnit.test( &quot;Base URL is not CampaignURL Base URL&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	var expected = &quot;//api.nytimes.com/svc/elections/us/v3/finances&quot;;
+	assert.ok(actual.getBaseURL() != expected);
+});
+
+
+QUnit.test( &quot;Independent response formats between objects&quot;, function(assert){
+	var url1 = new NYT.CampaignURL.CandidateSearch();
+	var url2 = new NYT.CampaignURL.CandidateSearch();
+
+	url1.setResponseFormat(&quot;json&quot;);
+	url2.setResponseFormat(&quot;xml&quot;);
+
+	assert.ok(url2.getResponseFormat() != url1.getResponseFormat());
+});
+
+
+/* GETTERS AND SETTERS */
+
+
+QUnit.test( &quot;setCampainCycle&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	actual.setCampaignCycle(&quot;2000-present&quot;);
+	
+	var expected = &quot;2000-present&quot;;
+	
+	assert.ok(actual.getCampaignCycle() == expected);
+});
+
+QUnit.test( &quot;setApiKey&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	actual.setApiKey(&quot;ABC&quot;);
+
+	var expected = &quot;ABC&quot;;
+
+	assert.ok(actual.getApiKey() == expected);
+});
+
+QUnit.test( &quot;setResponseFormat&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	actual.setResponseFormat(&quot;xml&quot;);
+	
+	var expected = &quot;xml&quot;;
+	
+	assert.ok(actual.getResponseFormat() == expected);
+});
+
+
+QUnit.test( &quot;setCallback&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	
+	var a = function(){
+		return 1;
+	};
+	
+	actual.setCallback(a);
+	var expected = a;
+
+	assert.ok(actual.getCallback() == expected);
+
+});
+
+QUnit.test( &quot;setVersion&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+	actual.setVersion(&quot;v3&quot;);
+	var expected = &quot;v3&quot;;
+
+	assert.ok(actual.getVersion() == expected);
+
+});
+
+
+/*
+ * CALLABLE URLS
+ */
+
+// No parameters
+QUnit.test( &quot;Generate Callable URL: NO PARAMS&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;&quot;;
+	var response_format = &quot;&quot;;
+	var campaign_cycle = &quot;&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+// 1 parameter
+
+QUnit.test( &quot;Generate Callable URL: API-KEY&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;ABC&quot;;
+	var response_format = &quot;&quot;;
+	var campaign_cycle = &quot;&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+
+QUnit.test( &quot;Generate Callable URL: FORMAT&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;&quot;;
+	var response_format = &quot;json&quot;;
+	var campaign_cycle = &quot;&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+QUnit.test( &quot;Generate Callable URL: CAMPAIGN&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;&quot;;
+	var response_format = &quot;&quot;;
+	var campaign_cycle = &quot;2000-present&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+
+// 2 parameters
+
+QUnit.test( &quot;Generate Callable URL: API-KEY + FORMAT&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;ABC&quot;;
+	var response_format = &quot;json&quot;;
+	var campaign_cycle = &quot;&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+QUnit.test( &quot;Generate Callable URL: API-KEY + CAMPAIGN&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;ABC&quot;;
+	var response_format = &quot;&quot;;
+	var campaign_cycle = &quot;2000-present&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+QUnit.test( &quot;Generate Callable URL: FORMAT + CAMPAIGN&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;&quot;;
+	var response_format = &quot;json&quot;;
+	var campaign_cycle = &quot;2000-present&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = false;
+
+	assert.ok(actual.generateURL() == false);
+
+});
+
+
+QUnit.test( &quot;Generate Callable URL: API-KEY + FORMAT + CAMPAIGN&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;ABC&quot;;
+	var response_format = &quot;json&quot;;
+	var campaign_cycle = &quot;2000-present&quot;;
+	var query = &quot;&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = &quot;http://api.nytimes.com/svc/elections/us/v3/finances/&quot; +
+					campaign_cycle + &quot;/&quot; +
+					&quot;candidates/search.&quot; +
+					response_format +  
+					&quot;api-key=&quot; + api_key + &quot;&amp;&quot;;
+
+	assert.ok(actual.generateURL() == expected);
+
+});
+
+
+
+
+QUnit.test( &quot;Generate Callable URL: API-KEY + FORMAT + CAMPAIGN CYCLE + QUERY&quot;, function(assert){
+	var actual = new NYT.CampaignURL.CandidateSearch();
+
+	var api_key = &quot;123&quot;;
+	var response_format = &quot;json&quot;;
+	var campaign_cycle = &quot;2008-present&quot;;
+	var query = &quot;Obama&quot;;
+
+	actual.setApiKey(api_key);
+	actual.setResponseFormat(response_format);
+	actual.setCampaignCycle(campaign_cycle);
+	actual.setQuery(query);
+
+	var expected = &quot;http://api.nytimes.com/svc/elections/us/v3/finances/&quot; +
+					&quot;2008-present&quot; + &quot;/&quot; +
+					&quot;candidates/search.&quot; +
+					response_format +  
+					&quot;api-key=&quot; + api_key + &quot;&amp;&quot; +
+					&quot;query=&quot; + query;
+
+	assert.ok(actual.generateURL() == expected);
+
+});</pre>
+</body>
+</html>

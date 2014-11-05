@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">jQuery.sap.require(&quot;jquery.sap.history&quot;);
+jQuery.sap.require(&quot;sap.m.InstanceManager&quot;);
+
+sap.ui.controller(&quot;ui5bp.view.App&quot;, {
+	
+	getDefaultPage : function () {
+		return &quot;Menu&quot;;
+	},
+	
+	onInit : function () {
+		var historyDefaultHandler = function (navType) {
+			if (navType === jQuery.sap.history.NavType.Back) {
+				this.navBack(this.getDefaultPage());
+			} else {
+				this.navTo(this.getDefaultPage(), null, false);
+			}
+		};
+		
+		var historyPageHandler = function (params, navType) {
+			if (!params || !params.id) {
+				jQuery.sap.log.error(&quot;invalid parameter: &quot; + params);
+			} else {
+				if (navType === jQuery.sap.history.NavType.Back) {
+					this.navBack(params.id);
+				} else {
+					this.navTo(params.id, params.data, false);
+				}
+			}
+		};
+		
+		jQuery.sap.history({
+			routes: [{
+				// This handler is executed when you navigate back to the history state on the path &quot;page&quot;
+				path : &quot;page&quot;,
+				handler : jQuery.proxy(historyPageHandler, this)
+			}],
+			// The default handler is executed when you navigate back to the history state with an empty hash
+			defaultHandler: jQuery.proxy(historyDefaultHandler, this)
+		});
+		
+		// subscribe to event bus
+		var bus = sap.ui.getCore().getEventBus();
+		bus.subscribe(&quot;nav&quot;, &quot;to&quot;, this.navHandler, this);
+		bus.subscribe(&quot;nav&quot;, &quot;back&quot;, this.navHandler, this);
+		bus.subscribe(&quot;nav&quot;, &quot;virtual&quot;, this.navHandler, this);		
+	},
+	
+	navHandler: function (channelId, eventId, data) {
+		if (eventId === &quot;to&quot;) {
+			this.navTo(data.id, data.data, true);
+		} else if (eventId === &quot;back&quot;) {
+			if(data &amp;&amp; data.id){
+				this.navBack(data.id);
+			} else {
+				jQuery.sap.history.back();				
+			}
+		} else if (eventId === &quot;virtual&quot;) {
+			jQuery.sap.history.addVirtualHistory();
+		} else {
+			jQuery.sap.log.error(&quot;&#39;nav&#39; event cannot be processed. There&#39;s no handler registered for event with id: &quot; + eventId);
+		}
+	},
+	
+	navTo : function (id, data, writeHistory) {
+		
+		if (id === undefined) {
+			
+			// invalid parameter
+			jQuery.sap.log.error(&quot;navTo failed due to missing id&quot;);
+		
+		} else {
+
+			var app = this.getView().app;
+			// navigate in the app control
+			app.to(id, &quot;slide&quot;, data);
+			
+		}
+	},
+	
+	navBack : function (id) {
+		
+		if (!id) {
+			
+			// invalid parameter
+			jQuery.sap.log.error(&quot;navBack - parameters id must be given&quot;);
+		
+		} else {
+			
+			// close open popovers
+			if (sap.m.InstanceManager.hasOpenPopover()) {
+				sap.m.InstanceManager.closeAllPopovers();
+			}
+			
+			// close open dialogs
+			if (sap.m.InstanceManager.hasOpenDialog()) {
+				sap.m.InstanceManager.closeAllDialogs();
+				jQuery.sap.log.info(&quot;navBack - closed dialog(s)&quot;);
+			}
+			
+			// ... and navigate back
+			var app = this.getView().app;
+			var currentId = (app.getCurrentPage()) ? app.getCurrentPage().getId() : null;
+			if (currentId !== id) {
+				app.backToPage(id);
+				jQuery.sap.log.info(&quot;navBack - back to page: &quot; + id);
+			}
+		}
+	}	
+});</pre>
+</body>
+</html>

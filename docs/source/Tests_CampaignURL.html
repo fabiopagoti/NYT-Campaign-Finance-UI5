@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">QUnit.module(&quot;CampaignURL&quot;);
+
+QUnit.test( &quot;_test&quot;, function( assert ) {
+	assert.ok( 1 == &quot;1&quot;, &quot;Passed!&quot; );
+});
+
+QUnit.test( &quot;Lib loaded&quot;, function(assert){
+
+	assert.ok( NYT.campaign != undefined , &quot;Lib was loaded&quot;);
+});
+
+QUnit.test( &quot;Creation of a CampaignURL object&quot;, function(assert){	
+	var actual = new NYT.CampaignURL();
+	assert.ok(actual instanceof NYT.CampaignURL);
+});
+
+
+QUnit.test( &quot;Get Base URL&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	var expected = &quot;//api.nytimes.com/svc/elections/us/v3/finances&quot;;
+	
+	assert.ok(actual.getBaseURL() == expected);
+
+});
+
+/* GETTERS AND SETTERS */
+
+QUnit.test( &quot;setCampainCycle&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	actual.setCampaignCycle(&quot;2000-present&quot;);
+	
+	var expected = &quot;2000-present&quot;;
+	
+	assert.ok(actual.getCampaignCycle() == expected);
+});
+
+QUnit.test( &quot;setApiKey&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	actual.setApiKey(&quot;ABC&quot;);
+
+	var expected = &quot;ABC&quot;;
+
+	assert.ok(actual.getApiKey() == expected);
+});
+
+QUnit.test( &quot;setResponseFormat&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	actual.setResponseFormat(&quot;xml&quot;);
+	
+	var expected = &quot;xml&quot;;
+	
+	assert.ok(actual.getResponseFormat() == expected);
+});
+
+
+QUnit.test( &quot;setCallback&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	
+	var a = function(){
+		return 1;
+	};
+	
+	actual.setCallback(a);
+	var expected = a;
+
+	assert.ok(actual.getCallback() == expected);
+
+});
+
+
+QUnit.test( &quot;setVersion&quot;, function(assert){
+	var actual = new NYT.CampaignURL();
+	actual.setVersion(&quot;v3&quot;);
+	var expected = &quot;v3&quot;;
+
+	assert.ok(actual.getVersion() == expected);
+
+});
+
+
+
+/* SETTERS VIA CONSTRUCTOS */
+// NYT.CampaignURL = function(campaign_cycle, api_key, response_format, callback, version){
+
+	
+QUnit.test( &quot;setCampaignCycle via Constructor&quot;, function(assert){
+	var actual = new NYT.CampaignURL(&quot;2000-present&quot;);
+
+	var expected = &quot;2000-present&quot;;
+
+	assert.ok(actual.getCampaignCycle() == expected);
+});
+
+
+QUnit.test( &quot;setApiKey via Constructor&quot;, function(assert){
+	var actual = new NYT.CampaignURL(&quot;&quot;, &quot;ABC&quot;);
+
+	var expected = &quot;ABC&quot;;
+
+	assert.ok(actual.getApiKey() == expected);
+});
+
+QUnit.test( &quot;setResponseFormat via Constructor&quot;, function(assert){
+	var actual = new NYT.CampaignURL(&quot;&quot;, &quot;&quot;, &quot;json&quot;);
+
+	var expected = &quot;json&quot;;
+
+	assert.ok(actual.getResponseFormat() == expected);
+});
+
+QUnit.test( &quot;setCallback via Constructor&quot;, function(assert){
+	a = function(){return 1;};
+
+	var actual = new NYT.CampaignURL(&quot;&quot;, &quot;&quot;, &quot;&quot;, a);
+
+	var expected = a;
+
+	assert.ok(actual.getCallback() == expected);
+});
+
+
+//////////////////////
+
+QUnit.test( &quot;Two independent CampaignURLs&quot;, function(assert){
+	var campaign1 = new NYT.CampaignURL();
+	var campaign2 = new NYT.CampaignURL();
+
+	// campaign1.setApiKey(&quot;API1&quot;);
+	// campaign2.setApiKey(&quot;API2&quot;);
+
+	assert.ok(campaign1 != campaign2);
+
+});
+
+QUnit.test( &quot;Two independent CampaignURLs&#39; API Keys&quot;, function(assert){
+	var campaign1 = new NYT.CampaignURL();
+	var campaign2 = new NYT.CampaignURL();
+
+	campaign1.setApiKey(&quot;API1&quot;);
+	campaign2.setApiKey(&quot;API2&quot;);
+
+	assert.ok(campaign1.getApiKey() != campaign2.getApiKey());
+
+});
+
+
+
+
+</pre>
+</body>
+</html>

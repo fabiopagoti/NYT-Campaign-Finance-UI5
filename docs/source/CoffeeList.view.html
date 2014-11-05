@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">sap.ui.jsview(&quot;ui5bp.view.CoffeeList&quot;, {
+
+    getControllerName: function() {
+        return &quot;ui5bp.view.CoffeeList&quot;;
+    },
+
+    createContent: function(oController) {
+
+        var oListTemplate = new sap.m.ObjectListItem({
+            title: &quot;{name}&quot;,
+            icon: &quot;sap-icon://goal&quot;,
+            intro: &quot;{description}&quot;,
+            number: &quot;{calories}&quot;,
+            numberUnit: &quot;Calories&quot;
+        });
+
+        var oList = new sap.m.List({});
+        oList.bindAggregation(&quot;items&quot;, &quot;/Coffee&quot;, oListTemplate);
+
+
+        return new sap.m.Page({
+            title: &quot;Coffee Menu&quot;,
+            showNavButton: &quot;{device&gt;/isPhone}&quot;,
+            navButtonPress: [oController.doNavBack, oController],
+            content: [oList],
+            headerContent: [],
+            footer: new sap.m.Bar({})
+        });
+    }
+
+});</pre>
+</body>
+</html>

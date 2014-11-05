@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">// API doc of expressjs app.use(): http://expressjs.com/api.html#app.use
+
+// write express args into an url config object
+var urlConfig = {
+    protocol : process.argv[2],
+    host : process.argv[3],
+    port : process.argv[4],
+    urlPath : process.argv[5]
+}
+
+// setup express
+var express = require(&#39;express&#39;),
+    app = express(),
+    urlPath = urlConfig.urlPath,
+    port = urlConfig.port;
+
+// set default mime type
+express.static.mime.default_type = &quot;text/xml&quot;;
+
+// enable compression
+app.use(express.compress());
+
+// serve static content
+app.use(urlPath, express.static(__dirname));
+
+// enable directory listening
+app.use(urlPath, express.directory(__dirname));
+
+// set port to listen
+app.listen(port);
+</pre>
+</body>
+</html>
