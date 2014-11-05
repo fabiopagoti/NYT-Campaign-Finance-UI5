@@ -36,12 +36,7 @@ sap.ui.jsview("ui5bp.view.MenuComplex", {
                 })]
             }),
             content: [oList],
-            footer: new sap.m.Bar({
-                contentMiddle: [new sap.m.Link("myproLink", {
-                    text: "v0.7.2",
-                    href: "http://blog.mypro.de/tag/ui5boilerplate/"
-                })]
-            })
+            // footer: 
         });
     }
 
