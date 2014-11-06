@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">var NYT;
+
+NYT = { };
+
+
+// QUnit does:
+
+(function() {
+	function F() {}
+	F.prototype = NYT;
+	NYT = new F();
+
+	// Make F NYT&#39;s constructor so that we can add to the prototype later
+	NYT.constructor = F;
+}());</pre>
+</body>
+</html>

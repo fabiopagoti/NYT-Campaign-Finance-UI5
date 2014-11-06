@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">sap.ui.jsview(&quot;ui5bp.view.App&quot;, {
+
+    getControllerName: function() {
+        return &quot;ui5bp.view.App&quot;;
+    },
+
+    createContent: function(oController) {
+
+        // set i18n model
+        var oI18nModel = new sap.ui.model.resource.ResourceModel({
+            bundleUrl: &quot;i18n/i18n.properties&quot;
+        });
+        sap.ui.getCore().setModel(oI18nModel, &quot;i18n&quot;);
+        this.setModel(oI18nModel, &quot;i18n&quot;);
+
+        // set device model
+        var oDeviceModel = new sap.ui.model.json.JSONModel({
+            isTouch: sap.ui.Device.support.touch,
+            isNoTouch: !sap.ui.Device.support.touch,
+            isPhone: sap.ui.Device.system.phone,
+            isNoPhone: !sap.ui.Device.system.phone,
+            listMode: (sap.ui.Device.system.phone) ? &quot;None&quot; : &quot;SingleSelectMaster&quot;,
+            listItemType: (sap.ui.Device.system.phone) ? &quot;Active&quot; : &quot;Inactive&quot;
+        });
+        oDeviceModel.setDefaultBindingMode(&quot;OneWay&quot;);
+        sap.ui.getCore().setModel(oDeviceModel, &quot;device&quot;);
+        this.setModel(oDeviceModel, &quot;device&quot;);
+
+        // to avoid scrollbars on desktop the root view must be set to block display
+        this.setDisplayBlock(true);
+
+        this.app = new sap.m.SplitApp({
+            afterDetailNavigate: function() {
+                if (sap.ui.Device.system.phone) {
+                    this.hideMaster();
+                }
+            },
+            homeIcon: {
+                &#39;phone&#39;: &#39;img/57_iPhone_Desktop_Launch.png&#39;,
+                &#39;phone@2&#39;: &#39;img/114_iPhone-Retina_Web_Clip.png&#39;,
+                &#39;tablet&#39;: &#39;img/72_iPad_Desktop_Launch.png&#39;,
+                &#39;tablet@2&#39;: &#39;img/144_iPad_Retina_Web_Clip.png&#39;,
+                &#39;favicon&#39;: &#39;img/favicon.ico&#39;,
+                &#39;precomposed&#39;: false
+            }
+        });
+
+        
+//        this.app.addMasterPage(sap.ui.jsview(&quot;Menu&quot;, &quot;ui5bp.view.Menu&quot;));
+        this.app.addMasterPage(sap.ui.jsview(&quot;MenuComplex&quot;, &quot;ui5bp.view.MenuComplex&quot;));
+
+        this.app.addDetailPage(sap.ui.jsview(&quot;CandidateSearch&quot;, &quot;ui5bp.view.CandidateSearch&quot;));
+        // this.app.addDetailPage(sap.ui.xmlview(&quot;Info&quot;, &quot;ui5bp.view.Info&quot;));
+        // this.app.addDetailPage(sap.ui.jsview(&quot;CoffeeList&quot;, &quot;ui5bp.view.CoffeeList&quot;));
+        // this.app.addDetailPage(sap.ui.jsview(&quot;NewFeatures-v122&quot;, &quot;ui5bp.view.NewFeatures-v122&quot;));
+        
+        // navigate to the first page in both master and detail areas.
+        // the toMaster must be called after calling the toDetail, because both of them point to the same reference in phone and 
+        // the real first page that will be shown in phone is the page in master area. 
+        this.app.toDetail(&quot;CandidateSearch&quot;);
+        this.app.toMaster(&quot;MenuComplex&quot;);
+
+        return this.app;
+    }
+});</pre>
+</body>
+</html>

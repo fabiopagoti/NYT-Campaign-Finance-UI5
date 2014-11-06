@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">&#39;use strict&#39;;
+
+// url config
+var urlConfig = {
+    protocol : &#39;http&#39;,
+    host : &#39;localhost&#39;,
+    port : &#39;8877&#39;,
+    urlPath : &#39;/ui5-boilerplate&#39;
+}
+
+module.exports = function(grunt) {
+
+    // load tasks from plugins
+    grunt.loadNpmTasks(&#39;grunt-express-server&#39;);
+    grunt.loadNpmTasks(&#39;grunt-open&#39;);
+    grunt.loadNpmTasks(&#39;grunt-contrib-watch&#39;);
+
+    // config
+    grunt.initConfig({
+        watch: {
+            express: {
+                files: [&#39;**/*.js&#39;],
+                tasks: [&#39;express:dev&#39;],
+                options: {
+                    spawn: false
+                }
+            }
+        },
+        open: {
+            dev: {
+                path: urlConfig.protocol + &#39;://&#39; + urlConfig.host + &#39;:&#39; + urlConfig.port + urlConfig.urlPath
+            }
+        },
+        express: {
+            options: {
+                // Override defaults here, see more at: https://npmjs.org/package/grunt-express-server
+                args: [urlConfig.protocol, urlConfig.host, urlConfig.port, urlConfig.urlPath]
+            },
+            dev: {
+                options: {
+                    script: &#39;dev_server.js&#39;,
+                    delay: 100
+                }
+            }
+            // add more servers here...
+        }
+    });
+
+    // events
+    grunt.event.on(&#39;watch&#39;, function(action, filepath, target) {
+        grunt.log.writeln(target + &#39;: &#39; + filepath + &#39; has &#39; + action);
+    });
+
+    // tasks
+    grunt.registerTask(&#39;server:dev&#39;, [&#39;express:dev&#39;, &#39;open:dev&#39;, &#39;watch&#39;]);
+    grunt.registerTask(&#39;server&#39;, [&#39;server:dev&#39;]); // alias for &quot;server:dev&quot;, since there are no other servers (yet)
+    grunt.registerTask(&#39;default&#39;, [&#39;server:dev&#39;]); // default points to &#39;server&#39; task
+
+};</pre>
+</body>
+</html>
