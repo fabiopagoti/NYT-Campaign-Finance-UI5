@@ -1,12 +1,8 @@
+
 QUnit.module("CampaignURL");
 
-QUnit.test( "_test", function( assert ) {
-	assert.ok( 1 == "1", "Passed!" );
-});
-
 QUnit.test( "Lib loaded", function(assert){
-
-	assert.ok( NYT.campaign != undefined , "Lib was loaded");
+	assert.ok( NYT.CampaignURL instanceof Object , "Lib was loaded");
 });
 
 QUnit.test( "Creation of a CampaignURL object", function(assert){	
@@ -17,9 +13,9 @@ QUnit.test( "Creation of a CampaignURL object", function(assert){
 
 QUnit.test( "Get Base URL", function(assert){
 	var actual = new NYT.CampaignURL();
-	var expected = "//api.nytimes.com/svc/elections/us/v3/finances";
+	var expected = "//api.nytimes.com/svc/elections/us/{version}/finances?";
 	
-	assert.ok(actual.getBaseURL() == expected);
+	assert.equal(actual.getBaseURL() , expected);
 
 });
 
@@ -31,7 +27,7 @@ QUnit.test( "setCampainCycle", function(assert){
 	
 	var expected = "2000-present";
 	
-	assert.ok(actual.getCampaignCycle() == expected);
+	assert.equal(actual.getCampaignCycle() , expected);
 });
 
 QUnit.test( "setApiKey", function(assert){
@@ -40,7 +36,7 @@ QUnit.test( "setApiKey", function(assert){
 
 	var expected = "ABC";
 
-	assert.ok(actual.getApiKey() == expected);
+	assert.equal(actual.getApiKey() , expected);
 });
 
 QUnit.test( "setResponseFormat", function(assert){
@@ -49,7 +45,7 @@ QUnit.test( "setResponseFormat", function(assert){
 	
 	var expected = "xml";
 	
-	assert.ok(actual.getResponseFormat() == expected);
+	assert.equal(actual.getResponseFormat() , expected);
 });
 
 
@@ -63,7 +59,19 @@ QUnit.test( "setCallback", function(assert){
 	actual.setCallback(a);
 	var expected = a;
 
-	assert.ok(actual.getCallback() == expected);
+	assert.equal(actual.getCallback() , expected);
+
+});
+
+QUnit.test( "setMandatoryParameters", function(assert){
+	var actual = new NYT.CampaignURL();
+	var params = ["api-key", "version"];
+	
+	actual.setMandatoryParameters(params)
+	
+	var expected = params;
+
+	assert.equal(actual.getMandatoryParameters() , expected);
 
 });
 
@@ -73,13 +81,14 @@ QUnit.test( "setVersion", function(assert){
 	actual.setVersion("v3");
 	var expected = "v3";
 
-	assert.ok(actual.getVersion() == expected);
+	assert.equal(actual.getVersion() , expected);
 
 });
 
 
 
-/* SETTES VIA CONSTRUCTOS */
+/* SETTERS VIA CONSTRUCTOS */
+
 // NYT.CampaignURL = function(campaign_cycle, api_key, response_format, callback, version){
 
 	
@@ -88,7 +97,7 @@ QUnit.test( "setCampaignCycle via Constructor", function(assert){
 
 	var expected = "2000-present";
 
-	assert.ok(actual.getCampaignCycle() == expected);
+	assert.equal(actual.getCampaignCycle() , expected);
 });
 
 
@@ -97,7 +106,7 @@ QUnit.test( "setApiKey via Constructor", function(assert){
 
 	var expected = "ABC";
 
-	assert.ok(actual.getApiKey() == expected);
+	assert.equal(actual.getApiKey() , expected);
 });
 
 QUnit.test( "setResponseFormat via Constructor", function(assert){
@@ -105,7 +114,7 @@ QUnit.test( "setResponseFormat via Constructor", function(assert){
 
 	var expected = "json";
 
-	assert.ok(actual.getResponseFormat() == expected);
+	assert.equal(actual.getResponseFormat() , expected);
 });
 
 QUnit.test( "setCallback via Constructor", function(assert){
@@ -115,20 +124,17 @@ QUnit.test( "setCallback via Constructor", function(assert){
 
 	var expected = a;
 
-	assert.ok(actual.getCallback() == expected);
+	assert.equal(actual.getCallback() , expected);
 });
 
 
-//////////////////////
+/* Instances */
 
 QUnit.test( "Two independent CampaignURLs", function(assert){
 	var campaign1 = new NYT.CampaignURL();
 	var campaign2 = new NYT.CampaignURL();
 
-	// campaign1.setApiKey("API1");
-	// campaign2.setApiKey("API2");
-
-	assert.ok(campaign1 != campaign2);
+	assert.notEqual(campaign1, campaign2);
 
 });
 
@@ -139,7 +145,21 @@ QUnit.test( "Two independent CampaignURLs' API Keys", function(assert){
 	campaign1.setApiKey("API1");
 	campaign2.setApiKey("API2");
 
-	assert.ok(campaign1.getApiKey() != campaign2.getApiKey());
+	assert.notEqual(campaign1.getApiKey(), campaign2.getApiKey());
+
+});
+
+
+
+/* Mandatory parameters */
+
+
+QUnit.test( "Default Mandatory parameters", function(assert){
+	var actual = new NYT.CampaignURL();
+
+	var expected = ["api-key", "campaign-url", "response-format", "version"];
+
+	assert.equal(actual.getMandatoryParameters().toString() , expected.toString());
 
 });
 
